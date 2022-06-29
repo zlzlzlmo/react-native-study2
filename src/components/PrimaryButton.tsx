@@ -4,12 +4,13 @@ import { colors } from "../styles/variables";
 
 interface PrimaryButtonProps {
   children: string;
+  onPress: () => void;
 }
 
-const PrimaryButton = ({ children }: PrimaryButtonProps) => {
+const PrimaryButton = ({ children, onPress }: PrimaryButtonProps) => {
   return (
     <Pressable
-      onPress={() => {}}
+      onPress={onPress}
       style={({ pressed }) => pressed && styles.pressed}
     >
       <View style={styles.container}>

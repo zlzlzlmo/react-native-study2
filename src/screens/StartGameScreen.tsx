@@ -6,8 +6,9 @@ import {
   Platform,
   StatusBar,
   TextInput,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 import { colors } from "../styles/variables";
 
@@ -19,6 +20,35 @@ import { colors } from "../styles/variables";
 
 // * width 100% 처럼 보이는것은 align Items 의 기본값이 stretch이기 떄문이다.
 const StartGameScreen = () => {
+  const [enteredValue, setEnteredValue] = useState<string>("");
+
+  const handleEnteredValue = (text: string) => {
+    setEnteredValue(text);
+  };
+
+  const resetEntererdValue = () => {
+    setEnteredValue("");
+  };
+
+  const handleConfirm = () => {
+    const { isValidNumber, number } = getValueForNumber(enteredValue);
+
+    if (!isValidNumber) {
+      Alert.alert(
+        "유효하지 않은 값",
+        "적절하지 못한 값입니다. 값은 오직 1이상 99이하만 가능합니다.",
+        [
+          {
+            text: "확인",
+            style: "destructive",
+            onPress: () => resetEntererdValue(),
+          },
+        ]
+      );
+      return;
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
@@ -27,13 +57,15 @@ const StartGameScreen = () => {
           maxLength={2}
           keyboardType="number-pad"
           autoCapitalize="none"
+          value={enteredValue}
+          onChangeText={handleEnteredValue}
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <PrimaryButton>버튼1</PrimaryButton>
+            <PrimaryButton onPress={() => {}}>취소</PrimaryButton>
           </View>
           <View style={styles.button}>
-            <PrimaryButton>버튼2</PrimaryButton>
+            <PrimaryButton onPress={handleConfirm}>확인</PrimaryButton>
           </View>
         </View>
       </View>
@@ -87,3 +119,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
 });
+
+function getValueForNumber(enteredValue: string) {
+  const number = parseInt(enteredValue);
+
+  const isValidNumber = isNaN(number) || number < 1 || number > 99;
+
+  return {
+    number,
+    isValidNumber,
+  };
+}
