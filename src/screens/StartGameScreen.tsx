@@ -9,12 +9,15 @@ import {
 } from "react-native";
 import React from "react";
 import PrimaryButton from "../components/PrimaryButton";
+import { colors } from "../styles/variables";
 
 // * StyleSheet에 elevation 스타일 속성이 있는데 숫자가 높을 수록 box-shadow 효과를 보여준다  ( 안드로이드만 가능 ! )
 // ! IOS도 shadow효과를 주고 싶으면 shadowColor, shadowOffset, shadowOpacity, shadowRadius를 사용해야한다 ( 이것은 IOS만 가능 하기 때문에 두 플랫폼 모두 적용하려면 elevation과 이거 모두 적용 해야함 )
 
 // * TextInput에 있는 keyboardType 속성 값으로 인풋 입력시 사용할 키보드 타입을 지정할 수 있다.
 // * 또한 default 각 문장별로 첫번째 문자는 대문자로 쓰이는데 autoCapitalize 를 false를 주면 대문자로 변환하는걸 막을 수 있다.
+
+// * width 100% 처럼 보이는것은 align Items 의 기본값이 stretch이기 떄문이다.
 const StartGameScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
@@ -25,8 +28,14 @@ const StartGameScreen = () => {
           keyboardType="number-pad"
           autoCapitalize="none"
         />
-        <PrimaryButton>버튼1</PrimaryButton>
-        <PrimaryButton>버튼2</PrimaryButton>
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <PrimaryButton>버튼1</PrimaryButton>
+          </View>
+          <View style={styles.button}>
+            <PrimaryButton>버튼2</PrimaryButton>
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -38,8 +47,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    width: "100%",
   },
   inputContainer: {
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 100,
     marginHorizontal: 24,
     borderRadius: 8,
@@ -52,17 +64,26 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 3.84,
     shadowOpacity: 0.25,
-    alignItems: "center",
+
+    backgroundColor: colors.mainColor,
   },
   numberInput: {
     width: 50,
     height: 50,
     fontSize: 32,
-    borderBottomColor: "#ddb52f",
+    borderBottomColor: "#fff",
     borderBottomWidth: 2,
-    color: "#ddb52f",
+    color: "#fff",
     marginVertical: 8,
     fontWeight: "bold",
     textAlign: "center",
+  },
+
+  buttonContainer: {
+    flexDirection: "row",
+  },
+  button: {
+    flex: 1,
+    marginHorizontal: 10,
   },
 });
