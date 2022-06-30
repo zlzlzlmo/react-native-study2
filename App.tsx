@@ -1,5 +1,11 @@
-import { useMemo, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useMemo, useState } from "react";
+import {
+  StyleSheet,
+  View,
+  SafeAreaView,
+  Platform,
+  StatusBar,
+} from "react-native";
 import GameScreen from "./src/screens/GameScreen";
 import StartGameScreen from "./src/screens/StartGameScreen";
 import { colors } from "./src/styles/variables";
@@ -17,12 +23,15 @@ export default function App() {
     }
     return <StartGameScreen pickNumber={pickNumber} />;
   }, [userNumber]);
-  return <View style={styles.rootContainer}>{screenToShow}</View>;
+  return (
+    <SafeAreaView style={styles.rootContainer}>{screenToShow}</SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: colors.subColor3,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 });

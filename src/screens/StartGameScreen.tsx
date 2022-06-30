@@ -58,37 +58,30 @@ const StartGameScreen = ({ pickNumber }: StartGameScreenProps) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.numberInput}
-          maxLength={2}
-          keyboardType="number-pad"
-          autoCapitalize="none"
-          value={enteredValue}
-          onChangeText={handleEnteredValue}
-        />
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <PrimaryButton onPress={() => {}}>취소</PrimaryButton>
-          </View>
-          <View style={styles.button}>
-            <PrimaryButton onPress={handleConfirm}>확인</PrimaryButton>
-          </View>
+    <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.numberInput}
+        maxLength={2}
+        keyboardType="number-pad"
+        autoCapitalize="none"
+        value={enteredValue}
+        onChangeText={handleEnteredValue}
+      />
+      <View style={styles.buttonContainer}>
+        <View style={styles.button}>
+          <PrimaryButton onPress={() => {}}>취소</PrimaryButton>
+        </View>
+        <View style={styles.button}>
+          <PrimaryButton onPress={handleConfirm}>확인</PrimaryButton>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    width: "100%",
-  },
   inputContainer: {
     justifyContent: "center",
     alignItems: "center",
