@@ -33,11 +33,7 @@ const GameScreen = ({ userNumber, onGameOver }: GameScreenProps) => {
   const [currentGuess, setCurrentGuess] = useState<number>(initialGuess);
 
   const generateNextGuessNumber = (direction: "lower" | "greater") => {
-    const isRightDirection =
-      (direction === "lower" && currentGuess > userNumber) ||
-      (direction === "greater" && currentGuess < userNumber);
-
-    if (!isRightDirection) {
+    if (!isRightDirection(direction, currentGuess, userNumber)) {
       Alert.alert("삐익!!", "솔직하게 답해주세요!", [
         { text: "다시 할게요!", style: "cancel" },
       ]);
@@ -92,3 +88,14 @@ const styles = StyleSheet.create({
     padding: 24,
   },
 });
+
+function isRightDirection(
+  direction: string,
+  currentGuess: number,
+  userNumber: number
+) {
+  return (
+    (direction === "lower" && currentGuess > userNumber) ||
+    (direction === "greater" && currentGuess < userNumber)
+  );
+}

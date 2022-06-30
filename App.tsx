@@ -24,9 +24,14 @@ export default function App() {
     setGameOver(true);
   };
 
+  const restartGame = () => {
+    setUserNumber(0);
+    setGameOver(false);
+  };
+
   const screenToShow = useMemo(() => {
     if (gameOver && userNumber) {
-      return <GameOverScreen />;
+      return <GameOverScreen onRestartGame={restartGame} />;
     }
 
     if (userNumber) {
