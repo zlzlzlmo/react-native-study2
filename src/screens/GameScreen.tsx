@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import React, { useState } from "react";
 import { colors } from "../styles/variables";
 import Title from "../components/ui/Title";
@@ -33,6 +33,16 @@ const GameScreen = ({ userNumber }: GameScreenProps) => {
   const [currentGuess, setCurrentGuess] = useState<number>(initialGuess);
 
   const generateNextGuessNumber = (direction: "lower" | "greater") => {
+    const isRightDirection =
+      (direction === "lower" && currentGuess > userNumber) ||
+      (direction === "greater" && currentGuess < userNumber);
+
+    if (!isRightDirection) {
+      Alert.alert("삐익!!", "솔직하게 답해주세요!", [
+        { text: "다시 할게요!", style: "cancel" },
+      ]);
+      return;
+    }
     if (direction === "lower") {
       maxBoundary = currentGuess;
     } else {
@@ -55,8 +65,14 @@ const GameScreen = ({ userNumber }: GameScreenProps) => {
       <View>
         <Text>Higher or Lower?</Text>
         <View>
-          <PrimaryButton onPress={() => {}}>+</PrimaryButton>
-          <PrimaryButton onPress={() => {}}>-</PrimaryButton>
+          <PrimaryButton
+            onPress={generateNextGuessNumber.bind(this, "greater")}
+          >
+            +
+          </PrimaryButton>
+          <PrimaryButton onPress={generateNextGuessNumber.bind(this, "lower")}>
+            -
+          </PrimaryButton>
         </View>
       </View>
     </View>

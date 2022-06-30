@@ -1,10 +1,16 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  GestureResponderEvent,
+} from "react-native";
 import React from "react";
 import { colors } from "../../styles/variables";
 
 interface PrimaryButtonProps {
   children: string;
-  onPress: () => void;
+  onPress: any;
 }
 
 const PrimaryButton = ({ children, onPress }: PrimaryButtonProps) => {
