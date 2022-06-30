@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native";
 import React, { useState } from "react";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "../components/ui/PrimaryButton";
 import { colors } from "../styles/variables";
 
 // * StyleSheet에 elevation 스타일 속성이 있는데 숫자가 높을 수록 box-shadow 효과를 보여준다  ( 안드로이드만 가능 ! )

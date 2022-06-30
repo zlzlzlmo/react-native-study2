@@ -19,7 +19,7 @@ export default function App() {
 
   const screenToShow = useMemo(() => {
     if (userNumber > 0) {
-      return <GameScreen />;
+      return <GameScreen userNumber={userNumber} />;
     }
     return <StartGameScreen pickNumber={pickNumber} />;
   }, [userNumber]);
