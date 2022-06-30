@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
 });
 
 function getValueForNumber(enteredValue: string) {
-  const number = parseInt(enteredValue);
+  const number = Number(enteredValue);
 
   const isValidNumber =
     typeof number === "number" && number > 0 && number < 100;
