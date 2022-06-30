@@ -21,7 +21,11 @@ import { colors } from "../styles/variables";
 // * width 100% 처럼 보이는것은 align Items 의 기본값이 stretch이기 떄문이다.
 
 // * Alert.alert 를 사용하여 RN에서 제공하는 alert기능을 사용할 수 있다.
-const StartGameScreen = () => {
+
+interface StartGameScreenProps {
+  pickNumber: (pickedNumber: number) => void;
+}
+const StartGameScreen = ({ pickNumber }: StartGameScreenProps) => {
   const [enteredValue, setEnteredValue] = useState<string>("");
 
   const handleEnteredValue = (text: string) => {
@@ -49,6 +53,8 @@ const StartGameScreen = () => {
       );
       return;
     }
+
+    pickNumber(number);
   };
 
   return (
@@ -127,6 +133,7 @@ function getValueForNumber(enteredValue: string) {
 
   const isValidNumber =
     typeof number === "number" && number > 0 && number < 100;
+
   return {
     number,
     isValidNumber,
