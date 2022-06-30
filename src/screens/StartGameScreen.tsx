@@ -19,6 +19,8 @@ import { colors } from "../styles/variables";
 // * 또한 default 각 문장별로 첫번째 문자는 대문자로 쓰이는데 autoCapitalize 를 false를 주면 대문자로 변환하는걸 막을 수 있다.
 
 // * width 100% 처럼 보이는것은 align Items 의 기본값이 stretch이기 떄문이다.
+
+// * Alert.alert 를 사용하여 RN에서 제공하는 alert기능을 사용할 수 있다.
 const StartGameScreen = () => {
   const [enteredValue, setEnteredValue] = useState<string>("");
 
@@ -41,7 +43,7 @@ const StartGameScreen = () => {
           {
             text: "확인",
             style: "destructive",
-            onPress: () => resetEntererdValue(),
+            onPress: resetEntererdValue,
           },
         ]
       );
@@ -123,8 +125,8 @@ const styles = StyleSheet.create({
 function getValueForNumber(enteredValue: string) {
   const number = parseInt(enteredValue);
 
-  const isValidNumber = isNaN(number) || number < 1 || number > 99;
-
+  const isValidNumber =
+    typeof number === "number" && number > 0 && number < 100;
   return {
     number,
     isValidNumber,
